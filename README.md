@@ -11,4 +11,4 @@ Basically, a tree is maintained internally that IS the abstract syntax tree that
 
 At this point, the tree on the left is fixed, and the right side is generated dynamically
 
-![Screen Shot 1](/repository/screenshots/v001_main.png?raw=true "TreeHouse - Main Screen")
+![Screen Shot 1](screenshots/v001_main.png?raw=true "TreeHouse - Main Screen")
