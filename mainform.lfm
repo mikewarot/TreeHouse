@@ -1,7 +1,7 @@
 object Form1: TForm1
-  Left = 358
+  Left = 403
   Height = 573
-  Top = 172
+  Top = 177
   Width = 856
   Caption = 'Treehouse - Main Form'
   ClientHeight = 549
