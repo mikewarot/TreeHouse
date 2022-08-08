@@ -17,13 +17,25 @@ type
     MainMenu1: TMainMenu;
     Memo1: TMemo;
     MenuItem1: TMenuItem;
-    MenuItem2: TMenuItem;
+    MenuExit: TMenuItem;
     MenuItem3: TMenuItem;
-    MenuItem4: TMenuItem;
+    MenuAbout: TMenuItem;
+    MenuFileOpen: TMenuItem;
+    MenuFileSave: TMenuItem;
+    MenuSaveAs: TMenuItem;
+    OpenDialog1: TOpenDialog;
+    SaveDialog1: TSaveDialog;
+    Separator1: TMenuItem;
     TreeView1: TTreeView;
     procedure Button1Click(Sender: TObject);
-    procedure MenuItem2Click(Sender: TObject);
-    procedure MenuItem4Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure Button3Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure MenuExitClick(Sender: TObject);
+    procedure MenuAboutClick(Sender: TObject);
+    procedure MenuFileOpenClick(Sender: TObject);
+    procedure MenuFileSaveClick(Sender: TObject);
+    procedure MenuSaveAsClick(Sender: TObject);
     procedure TreeView1Change(Sender: TObject; Node: TTreeNode);
   private
 
@@ -33,6 +45,7 @@ type
 
 var
   Form1: TForm1;
+  FileName : String;
 
 implementation
 
@@ -145,14 +158,58 @@ begin
   Memo1.Append(ProgramString);
 end;
 
-procedure TForm1.MenuItem2Click(Sender: TObject);
+procedure TForm1.Button2Click(Sender: TObject);
+begin
+  TreeView1.SaveToFile('items.txt');
+end;
+
+procedure TForm1.Button3Click(Sender: TObject);
+begin
+  TreeView1.LoadFromFile('items.txt');
+  TreeView1.FullExpand;
+end;
+
+procedure TForm1.FormCreate(Sender: TObject);
+begin
+  FileName := '';
+end;
+
+procedure TForm1.MenuExitClick(Sender: TObject);
 begin
   Application.Terminate;
 end;
 
-procedure TForm1.MenuItem4Click(Sender: TObject);
+procedure TForm1.MenuAboutClick(Sender: TObject);
 begin
   ShowMessage('Treehouse is a program for building habitable spaces in trees');
+end;
+
+procedure TForm1.MenuFileOpenClick(Sender: TObject);
+begin
+  If OpenDialog1.Execute then
+  begin
+    FileName := OpenDialog1.FileName;
+    MenuFileSave.Enabled := True;
+    TreeView1.LoadFromFile(OpenDialog1.FileName);
+    TreeView1.FullExpand;
+  end;
+end;
+
+procedure TForm1.MenuFileSaveClick(Sender: TObject);
+begin
+  If FileName <> '' then
+    TreeView1.SaveToFile(FileName)
+  else
+    ShowMessage('No FileName Set, can not save!');
+end;
+
+procedure TForm1.MenuSaveAsClick(Sender: TObject);
+begin
+  If SaveDialog1.Execute then
+  begin
+    FileName := SaveDialog1.FileName;
+    TreeView1.SaveToFile(SaveDialog1.FileName);
+  end;
 end;
 
 procedure TForm1.TreeView1Change(Sender: TObject; Node: TTreeNode);

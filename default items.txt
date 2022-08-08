@@ -1,0 +1,24 @@
+@Entry Test1
+	@Block
+		@Print
+			@Expression
+				Happy Monday, Ward!
+		@Print
+			@Expression
+				Welcome to TræHus
+@Entry Test2
+	@VarBlock
+		@Var
+			@VarName #1
+				X
+			@VarType
+				i64
+	@Block
+		@Assignment
+			@Target #1
+			@Expression
+				42
+		@Print
+			'X = '
+			@Expression
+				@GetVar #1
