@@ -28,8 +28,6 @@ type
     Separator1: TMenuItem;
     TreeView1: TTreeView;
     procedure Button1Click(Sender: TObject);
-    procedure Button2Click(Sender: TObject);
-    procedure Button3Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure MenuExitClick(Sender: TObject);
     procedure MenuAboutClick(Sender: TObject);
@@ -56,16 +54,13 @@ uses
 Const
   crlf = #13#10;
 
-{ TForm1 }
-
-procedure TForm1.Button1Click(Sender: TObject);
+procedure ShowNode(const current: TTreeNode);
 var
-  current : TTreeNode;
+  ProgramString : String;
   CurrentString : String;
   NodeType : String;
-  ProgramString : String;
 
-  Procedure ViewNode(CurrentNode : TTreeNode);
+  Procedure ViewNode(CurrentNode : TTreeNode; Indent : String);
   var
     child : TTreeNode;
   begin
@@ -77,47 +72,47 @@ var
 
     Case NodeType of
       '@Entry' : Begin
-                   ProgramString := ProgramString + 'Program '+CurrentString+';'+CrLf;
+                   ProgramString := ProgramString + Indent + 'Program '+CurrentString+';'+CrLf;
                    If CurrentNode.HasChildren then
                    begin
                      Child := CurrentNode.GetFirstChild;
-                     ViewNode(Child);
+                     ViewNode(Child,Indent);
                      Child := CurrentNode.GetNextChild(Child);
                      While Child <> nil do
                      begin
-                       ViewNode(Child);
+                       ViewNode(Child,Indent);
                        Child := CurrentNode.GetNextChild(Child);
                      end;
                    end; // if HasChildren
                    ProgramString := ProgramString + '.';
                  end; // @Entry
       '@Block' : Begin
-                   ProgramString := ProgramString + 'Begin'+CrLf;
+                   ProgramString := ProgramString + Indent + 'Begin'+CrLf;
                    If CurrentNode.HasChildren then
                    begin
                      Child := CurrentNode.GetFirstChild;
-                     ViewNode(Child);
+                     ViewNode(Child,Indent+'  ');
                      Child := CurrentNode.GetNextChild(Child);
                      While Child <> nil do
                      begin
                        ProgramString := ProgramString + ';'+CrLf;
-                       ViewNode(Child);
+                       ViewNode(Child,Indent+'  ');
                        Child := CurrentNode.GetNextChild(Child);
                      end;
                    end; // if HasChildren
                    ProgramString := ProgramString + CrLf + 'End';
                  end; // @Block
       '@Print' : Begin
-                   ProgramString := ProgramString + 'Write(';
+                   ProgramString := ProgramString + Indent + 'Write(';
                    If CurrentNode.HasChildren then
                    begin
                      Child := CurrentNode.GetFirstChild;
-                     ViewNode(Child);
+                     ViewNode(Child,'');
                      Child := CurrentNode.GetNextChild(Child);
                      While Child <> nil do
                      begin
                        ProgramString := ProgramString + ',';
-                       ViewNode(Child);
+                       ViewNode(Child,'');
                        Child := CurrentNode.GetNextChild(Child);
                      end;
                    end; // if HasChildren
@@ -127,12 +122,12 @@ var
                    If CurrentNode.HasChildren then
                    begin
                      Child := CurrentNode.GetFirstChild;
-                     ViewNode(Child);
+                     ViewNode(Child,'');
                      Child := CurrentNode.GetNextChild(Child);
                      While Child <> nil do
                      begin
                        ProgramString := ProgramString + ' ';
-                       ViewNode(Child);
+                       ViewNode(Child,'');
                        Child := CurrentNode.GetNextChild(Child);
                      end;
                    end; // if HasChildren
@@ -145,28 +140,24 @@ var
   end; // ViewNode
 
 begin
+  Form1.Memo1.Clear;
+  ProgramString := '';
+  ViewNode(Current,'');
+  Form1.Memo1.Append(ProgramString);
+end;
+
+
+{ TForm1 }
+
+procedure TForm1.Button1Click(Sender: TObject);
+var
+  current : TTreeNode;
+begin
   Current := TreeView1.Selected;
   If Current = Nil then
-  begin
-    ShowMessage('No Node Selected!');
-    Exit;
-  end;
-
-  Memo1.Clear;
-  ProgramString := '';
-  ViewNode(Current);
-  Memo1.Append(ProgramString);
-end;
-
-procedure TForm1.Button2Click(Sender: TObject);
-begin
-  TreeView1.SaveToFile('items.txt');
-end;
-
-procedure TForm1.Button3Click(Sender: TObject);
-begin
-  TreeView1.LoadFromFile('items.txt');
-  TreeView1.FullExpand;
+    ShowMessage('No Node Selected!')
+  else
+    ShowNode(current);
 end;
 
 procedure TForm1.FormCreate(Sender: TObject);
