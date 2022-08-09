@@ -1,7 +1,7 @@
 object Form1: TForm1
-  Left = 414
+  Left = 456
   Height = 347
-  Top = 194
+  Top = 144
   Width = 804
   Caption = 'Treehouse - Main Form'
   ClientHeight = 323
@@ -14,8 +14,11 @@ object Form1: TForm1
     Height = 279
     Top = 0
     Width = 398
+    PopupMenu = PopupMenu1
+    RightClickSelect = True
     TabOrder = 0
     OnChange = TreeView1Change
+    Options = [tvoAutoItemHeight, tvoHideSelection, tvoKeepCollapsedNodes, tvoRightClickSelect, tvoShowButtons, tvoShowLines, tvoShowRoot, tvoToolTips, tvoThemedDraw]
     Items.Data = {
       F9FFFFFF020002000000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF010000000000
       0000010C00000040456E747279205465737431FFFFFFFFFFFFFFFFFFFFFFFFFF
@@ -114,5 +117,13 @@ object Form1: TForm1
     Options = [ofOverwritePrompt, ofEnableSizing, ofViewDetail]
     Left = 176
     Top = 8
+  end
+  object PopupMenu1: TPopupMenu
+    Left = 264
+    Top = 8
+    object MenuItem2: TMenuItem
+      Caption = 'Delete'
+      OnClick = MenuItem2Click
+    end
   end
 end

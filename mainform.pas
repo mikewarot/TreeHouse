@@ -18,12 +18,14 @@ type
     Memo1: TMemo;
     MenuItem1: TMenuItem;
     MenuExit: TMenuItem;
+    MenuItem2: TMenuItem;
     MenuItem3: TMenuItem;
     MenuAbout: TMenuItem;
     MenuFileOpen: TMenuItem;
     MenuFileSave: TMenuItem;
     MenuSaveAs: TMenuItem;
     OpenDialog1: TOpenDialog;
+    PopupMenu1: TPopupMenu;
     SaveDialog1: TSaveDialog;
     Separator1: TMenuItem;
     TreeView1: TTreeView;
@@ -33,6 +35,7 @@ type
     procedure MenuAboutClick(Sender: TObject);
     procedure MenuFileOpenClick(Sender: TObject);
     procedure MenuFileSaveClick(Sender: TObject);
+    procedure MenuItem2Click(Sender: TObject);
     procedure MenuSaveAsClick(Sender: TObject);
     procedure TreeView1Change(Sender: TObject; Node: TTreeNode);
   private
@@ -194,6 +197,15 @@ begin
     ShowMessage('No FileName Set, can not save!');
 end;
 
+procedure TForm1.MenuItem2Click(Sender: TObject);
+var
+  current : TTreeNode;
+begin
+  Current := TreeView1.Selected;
+  TreeView1.Selected := Current.GetPrevSibling;
+  Current.Delete;
+end;
+
 procedure TForm1.MenuSaveAsClick(Sender: TObject);
 begin
   If SaveDialog1.Execute then
@@ -204,8 +216,12 @@ begin
 end;
 
 procedure TForm1.TreeView1Change(Sender: TObject; Node: TTreeNode);
+var
+  current : TTreeNode;
 begin
-  Button1.Click;
+  Current := TreeView1.Selected;
+  If Current <> Nil then
+    ShowNode(current);
 end;
 
 end.
