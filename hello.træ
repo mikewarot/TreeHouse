@@ -2,7 +2,9 @@
 	@Block
 		@Print
 			@Expression
-				Happy Monday, Ward!
+				Hello
+			@Expression
+				World!
 		@Print
 			@Expression
 				Welcome to TræHus

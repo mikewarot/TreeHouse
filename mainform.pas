@@ -18,11 +18,13 @@ type
     Memo1: TMemo;
     MenuItem1: TMenuItem;
     MenuExit: TMenuItem;
-    MenuItem2: TMenuItem;
+    MenuDelete: TMenuItem;
     MenuItem3: TMenuItem;
     MenuAbout: TMenuItem;
     MenuFileOpen: TMenuItem;
     MenuFileSave: TMenuItem;
+    MenuAdd: TMenuItem;
+    MenuAddChild: TMenuItem;
     MenuSaveAs: TMenuItem;
     OpenDialog1: TOpenDialog;
     PopupMenu1: TPopupMenu;
@@ -31,11 +33,13 @@ type
     TreeView1: TTreeView;
     procedure Button1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure MenuAddChildClick(Sender: TObject);
+    procedure MenuAddClick(Sender: TObject);
     procedure MenuExitClick(Sender: TObject);
     procedure MenuAboutClick(Sender: TObject);
     procedure MenuFileOpenClick(Sender: TObject);
     procedure MenuFileSaveClick(Sender: TObject);
-    procedure MenuItem2Click(Sender: TObject);
+    procedure MenuDeleteClick(Sender: TObject);
     procedure MenuSaveAsClick(Sender: TObject);
     procedure TreeView1Change(Sender: TObject; Node: TTreeNode);
   private
@@ -168,6 +172,28 @@ begin
   FileName := '';
 end;
 
+procedure TForm1.MenuAddChildClick(Sender: TObject);
+var
+  current : TTreeNode;
+begin
+  Current := TreeView1.Selected;
+  Current := TreeView1.Items.AddChildFirst(Current,'');
+  TreeView1.Selected := Current;
+  TreeView1.MakeSelectionVisible;
+  TreeView1.Selected.EditText;
+end;
+
+procedure TForm1.MenuAddClick(Sender: TObject);
+var
+  current : TTreeNode;
+begin
+  Current := TreeView1.Selected;
+  Current := TreeView1.Items.InsertBehind(Current,'');
+  TreeView1.Selected := Current;
+  TreeView1.MakeSelectionVisible;
+  TreeView1.Selected.EditText;
+end;
+
 procedure TForm1.MenuExitClick(Sender: TObject);
 begin
   Application.Terminate;
@@ -197,7 +223,7 @@ begin
     ShowMessage('No FileName Set, can not save!');
 end;
 
-procedure TForm1.MenuItem2Click(Sender: TObject);
+procedure TForm1.MenuDeleteClick(Sender: TObject);
 var
   current : TTreeNode;
 begin
@@ -212,6 +238,7 @@ begin
   begin
     FileName := SaveDialog1.FileName;
     TreeView1.SaveToFile(SaveDialog1.FileName);
+    MenuFileSave.Enabled := True;
   end;
 end;
 
