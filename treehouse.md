@@ -63,8 +63,9 @@
   - Debt - String constants are directly stored in the tree file, and leading spaces and special characters cause *undefined* behaviour.
 
 ## 12 - Glossary
+  - ARC42 - "arc42 is a template for architecture communication and documentation. It is a proven, practical and highly pragmatic approach and takes the pain out of documentation." You can learn more at [arc42](https://www.innoq.com/en/blog/brief-introduction-to-arc42/)
   - AST - Abstract Syntax Tree, a data structure that contains all the defining characteristics of a program, once removed from the constraints of the source code, including comments, variable names, etc.
-  
+  - SLOC - Software Lines Of Code - a measure used by software project managers to gauge complexity
   
 So, there is is... documentation in ARC42 format (abridged)
 
