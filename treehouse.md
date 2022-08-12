@@ -1,7 +1,8 @@
-TreeHouse 
+# TreeHouse 
   Notes in a structure similar to ARC42
 
 1. Introduction and Goals
+
   TreeHouse is a program that explores the relationships between an abstract syntax tree and source code.     The quality goals are simple:
       Minumum viable product -- This prototype just needs to be good enough to convey the concepts demostrated to an audience
       Not too crashy -- This prototype should work at least 90% of the time in front of an audience without frustrating everyone too much that the demo stops
@@ -28,13 +29,13 @@ TreeHouse
 
 5. Building Blocks
   Treehouse has two main elements at this time, as shown in the main screenshot. 
-    1. A tree view, containing the "abstract syntax tree"
-    2. A memo view, containing the "source code" generated from the currently selected node of the abstract syntax tree.
+  - A tree view, containing the "abstract syntax tree"
+  - A memo view, containing the "source code" generated from the currently selected node of the abstract syntax tree.
 
 6. Runtime
   Treehouse has two mutually modifying views
-    1. The tree view, which generates source code and stuffs it into the Memo view when a new node is selected by the user. This is done in TreeView1Change
-    2. The memo view, which selects the appropriate node upon selection by the user. This is done in Memo1Click
+  - The tree view, which generates source code and stuffs it into the Memo view when a new node is selected by the user. This is done in TreeView1Change
+  - The memo view, which selects the appropriate node upon selection by the user. This is done in Memo1Click
 
 7. Deployment
   Treehouse is a Lazarus GUI application, developed in a Windows enviroment, cross-platform use has not been tested.
@@ -48,17 +49,17 @@ TreeHouse
   August 2022 - Use Lazarus GUI because it offers a way to get a GUI up and running with minimal effort
 
 10. Quality Requirements
-  1. The GUI shall load or save a tree in less than 1 second on a machine with an SSD disk.
-  2. The GUI shall respond and complete any action in less than 1 second
+  - The GUI shall load or save a tree in less than 1 second on a machine with an SSD disk.
+  - The GUI shall respond and complete any action in less than 1 second
 
 11. Risks and Technical Debt
-  1. Risk - Treehouse is dependent on Lazarus, and the Windows 32 Common Controls
-  2. Debt - The mapping of nodes to memo items is done in an array of fixed size, it's an ugly kludge, but it does work.
-  3. Debt - Code is mixed with gui elements, and needs to be separated
-  4. Debt - String constants are directly stored in the tree file, and leading spaces and special characters cause *undefined* behaviour.
+  - Risk - Treehouse is dependent on Lazarus, and the Windows 32 Common Controls
+  - Debt - The mapping of nodes to memo items is done in an array of fixed size, it's an ugly kludge, but it does work.
+  - Debt - Code is mixed with gui elements, and needs to be separated
+  - Debt - String constants are directly stored in the tree file, and leading spaces and special characters cause *undefined* behaviour.
 
 12. Glossary
-  AST - Abstract Syntax Tree, a data structure that contains all the defining characteristics of a program, once removed from the constraints of the source code, including comments, variable names, etc.
+  - AST - Abstract Syntax Tree, a data structure that contains all the defining characteristics of a program, once removed from the constraints of the source code, including comments, variable names, etc.
   
 So, there is is... documentation in ARC42 format (abridged)
 
