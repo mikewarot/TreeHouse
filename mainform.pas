@@ -33,6 +33,7 @@ type
     TreeView1: TTreeView;
     procedure Button1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure Memo1Click(Sender: TObject);
     procedure MenuAddChildClick(Sender: TObject);
     procedure MenuAddClick(Sender: TObject);
     procedure MenuExitClick(Sender: TObject);
@@ -62,10 +63,17 @@ Const
   crlf = #13#10;
 var
   ProgramString : String;
+  SourceCount : integer;
+  SourceP     : Array[1..100000] of TTreeNode;
 
-  Procedure AddCode(CodeString : String);
+  Procedure AddCode(CodeString : String; Current : TTreeNode);
   begin
     ProgramString := ProgramString + CodeString;
+    While SourceCount < Length(programstring) do
+    begin
+      inc(sourceCount);
+      SourceP[SourceCount] := Current;
+    end;
   end;
 
 procedure ShowNode(const current: TTreeNode);
@@ -85,7 +93,7 @@ var
 
     Case NodeType of
       '@Entry' : Begin
-                   AddCode(Indent + 'Program '+CurrentString+';'+CrLf);
+                   AddCode(Indent + 'Program '+CurrentString+';'+CrLf,CurrentNode);
                    If CurrentNode.HasChildren then
                    begin
                      Child := CurrentNode.GetFirstChild;
@@ -97,10 +105,10 @@ var
                        Child := CurrentNode.GetNextChild(Child);
                      end;
                    end; // if HasChildren
-                   AddCode('.');
+                   AddCode('.',CurrentNode);
                  end; // @Entry
       '@Block' : Begin
-                   AddCode(Indent + 'Begin'+CrLf);
+                   AddCode(Indent + 'Begin'+CrLf,CurrentNode);
                    If CurrentNode.HasChildren then
                    begin
                      Child := CurrentNode.GetFirstChild;
@@ -108,15 +116,15 @@ var
                      Child := CurrentNode.GetNextChild(Child);
                      While Child <> nil do
                      begin
-                       AddCode(';'+CrLf);
+                       AddCode(';'+CrLf,CurrentNode);
                        ViewNode(Child,Indent+'  ');
                        Child := CurrentNode.GetNextChild(Child);
                      end;
                    end; // if HasChildren
-                   AddCode(CrLf + 'End');
+                   AddCode(CrLf + 'End',CurrentNode);
                  end; // @Block
       '@Print' : Begin
-                   AddCode(Indent + 'Write(');
+                   AddCode(Indent + 'Write(',CurrentNode);
                    If CurrentNode.HasChildren then
                    begin
                      Child := CurrentNode.GetFirstChild;
@@ -124,12 +132,12 @@ var
                      Child := CurrentNode.GetNextChild(Child);
                      While Child <> nil do
                      begin
-                       AddCode(',');
+                       AddCode(',',CurrentNode);
                        ViewNode(Child,'');
                        Child := CurrentNode.GetNextChild(Child);
                      end;
                    end; // if HasChildren
-                   AddCode(')');
+                   AddCode(')',CurrentNode);
                  end; // @Print
       '@Expression' : Begin
                    If CurrentNode.HasChildren then
@@ -139,22 +147,23 @@ var
                      Child := CurrentNode.GetNextChild(Child);
                      While Child <> nil do
                      begin
-                       AddCode(' ');
+                       AddCode(' ',CurrentNode);
                        ViewNode(Child,'');
                        Child := CurrentNode.GetNextChild(Child);
                      end;
                    end; // if HasChildren
                  end; // @Expression
 
-      '@StringConstant' : AddCode('''' + CurrentString + '''');
+      '@StringConstant' : AddCode('''' + CurrentString + '''',CurrentNode);
     else
-      AddCode(NodeType+' : '+CurrentString);
+      AddCode(NodeType+' : '+CurrentString,CurrentNode);
     end; // Case NodeType
   end; // ViewNode
 
 begin
   Form1.Memo1.Clear;
   ProgramString := '';
+  SourceCount := 0;
   ViewNode(Current,'');
   Form1.Memo1.Append(ProgramString);
 end;
@@ -176,6 +185,18 @@ end;
 procedure TForm1.FormCreate(Sender: TObject);
 begin
   FileName := '';
+end;
+
+procedure TForm1.Memo1Click(Sender: TObject);
+var
+  Current : TTreeNode;
+begin
+  If Memo1.SelStart > 0 then
+  begin
+    Current := SourceP[Memo1.SelStart];
+    TreeView1.Select(Current,[]);
+    TreeView1.Repaint;
+  end;
 end;
 
 procedure TForm1.MenuAddChildClick(Sender: TObject);
@@ -252,9 +273,12 @@ procedure TForm1.TreeView1Change(Sender: TObject; Node: TTreeNode);
 var
   current : TTreeNode;
 begin
-  Current := TreeView1.Selected;
-  If Current <> Nil then
-    ShowNode(current);
+  If TreeView1.Focused then
+  begin
+    Current := TreeView1.Selected;
+    If Current <> Nil then
+      ShowNode(current);
+  end;
 end;
 
 end.

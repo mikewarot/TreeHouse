@@ -1,10 +1,10 @@
 object Form1: TForm1
   Left = 456
-  Height = 347
-  Top = 144
+  Height = 348
+  Top = 143
   Width = 804
   Caption = 'Treehouse - Main Form'
-  ClientHeight = 323
+  ClientHeight = 324
   ClientWidth = 804
   Menu = MainMenu1
   OnCreate = FormCreate
@@ -68,6 +68,7 @@ object Form1: TForm1
     Lines.Strings = (
       'Memo1'
     )
+    OnClick = Memo1Click
     TabOrder = 2
   end
   object MainMenu1: TMainMenu
