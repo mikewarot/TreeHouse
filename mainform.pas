@@ -60,10 +60,16 @@ uses
   mystrings;
 Const
   crlf = #13#10;
+var
+  ProgramString : String;
+
+  Procedure AddCode(CodeString : String);
+  begin
+    ProgramString := ProgramString + CodeString;
+  end;
 
 procedure ShowNode(const current: TTreeNode);
 var
-  ProgramString : String;
   CurrentString : String;
   NodeType : String;
 
@@ -79,7 +85,7 @@ var
 
     Case NodeType of
       '@Entry' : Begin
-                   ProgramString := ProgramString + Indent + 'Program '+CurrentString+';'+CrLf;
+                   AddCode(Indent + 'Program '+CurrentString+';'+CrLf);
                    If CurrentNode.HasChildren then
                    begin
                      Child := CurrentNode.GetFirstChild;
@@ -91,10 +97,10 @@ var
                        Child := CurrentNode.GetNextChild(Child);
                      end;
                    end; // if HasChildren
-                   ProgramString := ProgramString + '.';
+                   AddCode('.');
                  end; // @Entry
       '@Block' : Begin
-                   ProgramString := ProgramString + Indent + 'Begin'+CrLf;
+                   AddCode(Indent + 'Begin'+CrLf);
                    If CurrentNode.HasChildren then
                    begin
                      Child := CurrentNode.GetFirstChild;
@@ -102,15 +108,15 @@ var
                      Child := CurrentNode.GetNextChild(Child);
                      While Child <> nil do
                      begin
-                       ProgramString := ProgramString + ';'+CrLf;
+                       AddCode(';'+CrLf);
                        ViewNode(Child,Indent+'  ');
                        Child := CurrentNode.GetNextChild(Child);
                      end;
                    end; // if HasChildren
-                   ProgramString := ProgramString + CrLf + 'End';
+                   AddCode(CrLf + 'End');
                  end; // @Block
       '@Print' : Begin
-                   ProgramString := ProgramString + Indent + 'Write(';
+                   AddCode(Indent + 'Write(');
                    If CurrentNode.HasChildren then
                    begin
                      Child := CurrentNode.GetFirstChild;
@@ -118,12 +124,12 @@ var
                      Child := CurrentNode.GetNextChild(Child);
                      While Child <> nil do
                      begin
-                       ProgramString := ProgramString + ',';
+                       AddCode(',');
                        ViewNode(Child,'');
                        Child := CurrentNode.GetNextChild(Child);
                      end;
                    end; // if HasChildren
-                   ProgramString := ProgramString + ')';
+                   AddCode(')');
                  end; // @Print
       '@Expression' : Begin
                    If CurrentNode.HasChildren then
@@ -133,16 +139,16 @@ var
                      Child := CurrentNode.GetNextChild(Child);
                      While Child <> nil do
                      begin
-                       ProgramString := ProgramString + ' ';
+                       AddCode(' ');
                        ViewNode(Child,'');
                        Child := CurrentNode.GetNextChild(Child);
                      end;
                    end; // if HasChildren
                  end; // @Expression
 
-      '@StringConstant' : ProgramString := ProgramString + '''' + CurrentString + '''';
+      '@StringConstant' : AddCode('''' + CurrentString + '''');
     else
-      ProgramString := ProgramString + NodeType+' : '+CurrentString;
+      AddCode(NodeType+' : '+CurrentString);
     end; // Case NodeType
   end; // ViewNode
 
