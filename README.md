@@ -13,6 +13,6 @@ At this point, the tree on the left is fixed, and the right side is generated dy
 
 ![Screen Shot 1](screenshots/v001_main.png?raw=true "TreeHouse - Main Screen")
 
-Documentation in ARC42 format is in [treehouse.md]treehouse.md
+Documentation in ARC42 format [is here](treehouse.md)
 
 
