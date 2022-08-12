@@ -1,0 +1,12 @@
+TreeHouse 
+  Notes in a structure similar to ARC42
+
+Introduction and Goals
+  TreeHouse is a program that explores the relationships between an abstract syntax tree and source code.     The quality goals are simple:
+      Minumum viable product -- This prototype just needs to be good enough to convey the concepts demostrated to an audience
+      Not too crashy -- This prototype should work at least 90% of the time in front of an audience without frustrating everyone too much that the demo stops
+      Visible connectivity -- It should clearly show that editing one part of a tree or its source makes applicable changes and context switches in the other
+    The stakeholders:
+      Mike Warot -- primary author, who has an idea to explore
+      Everyone else -- an audience the author hopes to reach with ideas about direct manipulation of syntax trees, annotation of source code, and other concepts otherwise hard to demonstrate
+
