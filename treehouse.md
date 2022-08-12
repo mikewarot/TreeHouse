@@ -1,7 +1,7 @@
 # TreeHouse 
   Notes in a structure similar to ARC42
 
-1. Introduction and Goals
+1. ## Introduction and Goals
 
   TreeHouse is a program that explores the relationships between an abstract syntax tree and source code.     The quality goals are simple:
   
@@ -13,7 +13,7 @@
   - Mike Warot -- primary author, who has an idea to explore
   - Everyone else -- an audience the author hopes to reach with ideas about direct manipulation of syntax trees, annotation of source code, and other concepts otherwise hard to demonstrate
 
-2. Constraints
+2. ## Constraints
 
   Treehouse has the following constraints
   - No budget -- there is a budget of 0 BTC, $0.00 for this project
