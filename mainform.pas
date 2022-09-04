@@ -19,6 +19,7 @@ type
     MenuItem1: TMenuItem;
     MenuExit: TMenuItem;
     MenuDelete: TMenuItem;
+    MenuItem2: TMenuItem;
     MenuItem3: TMenuItem;
     MenuAbout: TMenuItem;
     MenuFileOpen: TMenuItem;
@@ -27,6 +28,7 @@ type
     MenuAddChild: TMenuItem;
     MenuSaveAs: TMenuItem;
     OpenDialog1: TOpenDialog;
+    ImportDialog: TOpenDialog;
     PopupMenu1: TPopupMenu;
     SaveDialog1: TSaveDialog;
     Separator1: TMenuItem;
@@ -41,6 +43,7 @@ type
     procedure MenuFileOpenClick(Sender: TObject);
     procedure MenuFileSaveClick(Sender: TObject);
     procedure MenuDeleteClick(Sender: TObject);
+    procedure MenuItem2Click(Sender: TObject);
     procedure MenuSaveAsClick(Sender: TObject);
     procedure TreeView1Change(Sender: TObject; Node: TTreeNode);
   private
@@ -58,7 +61,7 @@ implementation
 {$R *.lfm}
 
 uses
-  mystrings;
+  mystrings,pascal_compiler;
 Const
   crlf = #13#10;
 var
@@ -257,6 +260,15 @@ begin
   Current := TreeView1.Selected;
   TreeView1.Selected := Current.GetPrevSibling;
   Current.Delete;
+end;
+
+procedure TForm1.MenuItem2Click(Sender: TObject);
+begin
+  If ImportDialog.Execute then
+  begin
+    FileName := ImportDialog.FileName;
+    CompileFile(FileName);
+  end;
 end;
 
 procedure TForm1.MenuSaveAsClick(Sender: TObject);

@@ -21,8 +21,8 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="249"/>
-        <CursorPos Y="282"/>
+        <TopLine Value="261"/>
+        <CursorPos X="49" Y="271"/>
         <UsageCount Value="33"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -43,37 +43,29 @@
       </Unit>
       <Unit>
         <Filename Value="C:\lazarus\lcl\include\customedit.inc"/>
-        <EditorIndex Value="1"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="148"/>
         <CursorPos Y="166"/>
         <UsageCount Value="10"/>
+      </Unit>
+      <Unit>
+        <Filename Value="C:\lazarus\lcl\comctrls.pp"/>
+        <UnitName Value="ComCtrls"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="3656"/>
+        <CursorPos X="15" Y="3672"/>
+        <UsageCount Value="10"/>
+      </Unit>
+      <Unit>
+        <Filename Value="pascal_compiler.pas"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="1"/>
+        <CursorPos Y="24"/>
+        <UsageCount Value="20"/>
         <Loaded Value="True"/>
       </Unit>
     </Units>
     <JumpHistory HistoryIndex="29">
-      <Position>
-        <Filename Value="mainform.pas"/>
-      </Position>
-      <Position>
-        <Filename Value="mainform.pas"/>
-        <Caret Line="67" Column="16" TopLine="37"/>
-      </Position>
-      <Position>
-        <Filename Value="mainform.pas"/>
-        <Caret Line="73" Column="35" TopLine="43"/>
-      </Position>
-      <Position>
-        <Filename Value="mainform.pas"/>
-        <Caret Line="74" Column="45" TopLine="44"/>
-      </Position>
-      <Position>
-        <Filename Value="mainform.pas"/>
-        <Caret Line="167" Column="16" TopLine="96"/>
-      </Position>
-      <Position>
-        <Filename Value="mainform.pas"/>
-        <Caret Line="196" Column="23" TopLine="178"/>
-      </Position>
       <Position>
         <Filename Value="mainform.pas"/>
         <Caret Line="181" Column="32" TopLine="179"/>
@@ -168,6 +160,30 @@
       <Position>
         <Filename Value="mainform.pas"/>
         <Caret Line="182" Column="13" TopLine="152"/>
+      </Position>
+      <Position>
+        <Filename Value="mainform.pas"/>
+        <Caret Line="282" TopLine="138"/>
+      </Position>
+      <Position>
+        <Filename Value="mainform.pas"/>
+        <Caret Line="240" Column="22" TopLine="234"/>
+      </Position>
+      <Position>
+        <Filename Value="mainform.pas"/>
+        <Caret Line="242" Column="22" TopLine="236"/>
+      </Position>
+      <Position>
+        <Filename Value="pascal_compiler.pas"/>
+        <Caret Line="20" Column="26"/>
+      </Position>
+      <Position>
+        <Filename Value="mainform.pas"/>
+        <Caret Line="63" Column="28" TopLine="44"/>
+      </Position>
+      <Position>
+        <Filename Value="mainform.pas"/>
+        <Caret Line="280" TopLine="261"/>
       </Position>
     </JumpHistory>
     <RunParams>
