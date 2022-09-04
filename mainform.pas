@@ -16,6 +16,7 @@ type
     Button1: TButton;
     MainMenu1: TMainMenu;
     Memo1: TMemo;
+    MemoLog: TMemo;
     MenuItem1: TMenuItem;
     MenuExit: TMenuItem;
     MenuDelete: TMenuItem;

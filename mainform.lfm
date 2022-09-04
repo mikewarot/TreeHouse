@@ -1,11 +1,11 @@
 object Form1: TForm1
   Left = 456
-  Height = 347
+  Height = 652
   Top = 144
-  Width = 804
+  Width = 909
   Caption = 'Treehouse - Main Form'
-  ClientHeight = 323
-  ClientWidth = 804
+  ClientHeight = 628
+  ClientWidth = 909
   Menu = MainMenu1
   OnCreate = FormCreate
   LCLVersion = '2.2.2.0'
@@ -70,6 +70,16 @@ object Form1: TForm1
     )
     OnClick = Memo1Click
     TabOrder = 2
+  end
+  object MemoLog: TMemo
+    Left = 0
+    Height = 234
+    Top = 312
+    Width = 798
+    Lines.Strings = (
+      'MemoLog'
+    )
+    TabOrder = 3
   end
   object MainMenu1: TMainMenu
     Left = 32
